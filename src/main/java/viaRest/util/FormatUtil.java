@@ -10,15 +10,15 @@ import java.util.Map;
 public class FormatUtil {
 
     public static void printContextData(String header, String info, Context context) {
-        System.out.println(String.format("[%s] %s", header, info));
+        System.out.printf("[%s] %s%n", header, info);
         if (context != null) {
             JsonObject data = context.getData();
             for (String key : data.keySet()) {
                 if (key.equals("messages") || key.equals("tools")) {
-                    System.out.println(String.format("  %s", key));
+                    System.out.printf("  %s%n", key);
                     JsonArray values = data.getAsJsonArray(key);
                     for (JsonElement value : values) {
-                        System.out.println(String.format("         %s", value));
+                        System.out.printf("         %s%n", value);
                     }
                 }
             }
@@ -27,11 +27,11 @@ public class FormatUtil {
     }
 
     public static void printResponseData(String header, String info, JsonObject response) {
-        System.out.println(String.format("[%s] %s", header, info));
+        System.out.printf("[%s] %s%n", header, info);
         if (response != null) {
             for (String key : response.keySet()) {
                 if (key.equals("message")) {
-                    System.out.println(String.format("  %s: %s", key, response.get(key)));
+                    System.out.printf("  %s: %s%n", key, response.get(key));
                 }
             }
         }
@@ -39,16 +39,16 @@ public class FormatUtil {
     }
 
     public static void printDict(String header, String info, Map<String, Object> data) {
-        System.out.println(String.format("[%s] %s", header, info));
+        System.out.printf("[%s] %s%n", header, info);
         for (Map.Entry<String, Object> entry : data.entrySet()) {
-            System.out.println(String.format("  %s: %s", entry.getKey(), entry.getValue()));
+            System.out.printf("  %s: %s%n", entry.getKey(), entry.getValue());
         }
         System.out.println();
     }
 
     public static void printInfo(String header, String data) {
-        System.out.println(String.format("[%s]", header));
-        System.out.println(String.format("  %s", data));
+        System.out.printf("[%s]%n", header);
+        System.out.printf("  %s%n", data);
         System.out.println();
     }
 }

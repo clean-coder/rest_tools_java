@@ -34,34 +34,25 @@ public class WeatherWithTools {
     }
     
     private static String getForecast(String city) {
-        String[] forecasts;
-        
-        switch (city) {
-            case "Paris":
-                forecasts = new String[]{
+        String[] forecasts = switch (city) {
+            case "Paris" -> new String[]{
                     "temperature: 30 celsius",
                     "wind: 5 km/h",
                     "precipitation: 0%"
-                };
-                break;
-            case "London":
-                forecasts = new String[]{
+            };
+            case "London" -> new String[]{
                     "temperature: 20 celsius",
                     "wind: 20 km/h",
                     "precipitation: 80%"
-                };
-                break;
-            case "Berlin":
-                forecasts = new String[]{
+            };
+            case "Berlin" -> new String[]{
                     "temperature: 15 celsius",
                     "wind: 10 km/h",
                     "precipitation: 0%"
-                };
-                break;
-            default:
-                forecasts = new String[]{};
-        }
-        
+            };
+            default -> new String[]{};
+        };
+
         return String.join("\n---\n", forecasts);
     }
     

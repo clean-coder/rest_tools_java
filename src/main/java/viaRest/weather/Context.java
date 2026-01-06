@@ -5,8 +5,7 @@ import com.google.gson.JsonObject;
 public class Context {
     // Definition of supported tools
     private static final JsonObject FORECAST_TOOL = createForecastTool();
-    
-    private final String modelName;
+
     private final JsonObject data;
     
     private static JsonObject createForecastTool() {
@@ -36,7 +35,6 @@ public class Context {
     }
     
     public Context(String modelName) {
-        this.modelName = modelName;
         this.data = new JsonObject();
         this.data.addProperty("model", modelName);
         this.data.add("messages", new com.google.gson.JsonArray());
@@ -58,14 +56,6 @@ public class Context {
         this.data.getAsJsonArray("messages").add(message);
     }
     
-    // Not used here
-    public void addResponseMessage(String response) {
-        JsonObject message = new JsonObject();
-        message.addProperty("role", "assistant");
-        message.addProperty("content", response);
-        this.data.getAsJsonArray("messages").add(message);
-    }
-    
     public void addToolMessageWithToolResults(String functionName, String toolResult) {
         JsonObject message = new JsonObject();
         message.addProperty("role", "tool");
@@ -76,9 +66,5 @@ public class Context {
     
     public JsonObject getData() {
         return data;
-    }
-    
-    public String getModelName() {
-        return modelName;
     }
 }
