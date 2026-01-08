@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import static viaRest.weather.Tools.getForecast;
+
 public class WeatherWithTools {
     
     private static final Gson gson = new Gson();
@@ -31,29 +33,6 @@ public class WeatherWithTools {
         
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         return gson.fromJson(response.body(), JsonObject.class);
-    }
-    
-    private static String getForecast(String city) {
-        String[] forecasts = switch (city) {
-            case "Paris" -> new String[]{
-                    "temperature: 30 celsius",
-                    "wind: 5 km/h",
-                    "precipitation: 0%"
-            };
-            case "London" -> new String[]{
-                    "temperature: 20 celsius",
-                    "wind: 20 km/h",
-                    "precipitation: 80%"
-            };
-            case "Berlin" -> new String[]{
-                    "temperature: 15 celsius",
-                    "wind: 10 km/h",
-                    "precipitation: 0%"
-            };
-            default -> new String[]{};
-        };
-
-        return String.join("\n---\n", forecasts);
     }
     
     private static final Map<String, Function<Map<String, String>, String>> availableFunctions = new HashMap<>();

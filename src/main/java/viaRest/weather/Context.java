@@ -2,37 +2,12 @@ package viaRest.weather;
 
 import com.google.gson.JsonObject;
 
+import static viaRest.weather.Tools.createForecastTool;
+
 public class Context {
-    // Definition of supported tools
     private static final JsonObject FORECAST_TOOL = createForecastTool();
 
     private final JsonObject data;
-    
-    private static JsonObject createForecastTool() {
-        JsonObject tool = new JsonObject();
-        tool.addProperty("type", "function");
-        
-        JsonObject function = new JsonObject();
-        function.addProperty("name", "get_forecast");
-        function.addProperty("description", "The weather forecast for a city");
-        
-        JsonObject parameters = new JsonObject();
-        parameters.addProperty("type", "object");
-        
-        JsonObject properties = new JsonObject();
-        JsonObject cityProperty = new JsonObject();
-        cityProperty.addProperty("type", "string");
-        cityProperty.addProperty("description", "The name of the city");
-        properties.add("city", cityProperty);
-        
-        parameters.add("properties", properties);
-        parameters.add("required", com.google.gson.JsonParser.parseString("[\"city\"]"));
-        
-        function.add("parameters", parameters);
-        tool.add("function", function);
-        
-        return tool;
-    }
     
     public Context(String modelName) {
         this.data = new JsonObject();
